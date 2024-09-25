@@ -16,7 +16,7 @@ npm install
 1.- Ambiente de desarrollo
 
 ```bash
-serverless offline start
+serverless deploy
 ```
 
 ## Contenido

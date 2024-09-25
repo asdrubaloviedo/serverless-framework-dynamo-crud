@@ -1,16 +1,59 @@
-service: hello-world
+service: crud-serverless-users
 
 provider:
   name: aws
   runtime: nodejs18.x
+  region: us-east-1
+  stage: dev
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action: 'dynamodb:*'
+          Resource: arn:aws:dynamodb:us-east-1:471112938813:table/${self:provider.environment.USERS_TABLE}
+  environment:
+    # Establecemos nuestras variables de entorno para ser usadas como "self:provider..environment" o "process.env"
+    USERS_TABLE: usersTable
 
 functions:
-  hello-world:
-    handler: handler.hello
+  createUser:
+    handler: handler.createUser
     events:
       - http:
-          path: hello
-          method: GET
+          path: users
+          method: post
 
-plugins:
-  - serverless-offline
+  getUser:
+    handler: handler.getUser
+    events:
+      - http:
+          path: users/{id}
+          method: get
+
+  updateUser:
+    handler: handler.updateUser
+    events:
+      - http:
+          path: users/{id}
+          method: put
+
+  deleteUser:
+    handler: handler.deleteUser
+    events:
+      - http:
+          path: users/{id}
+          method: delete
+
+resources:
+  Resources:
+    usersTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:provider.environment.USERS_TABLE}
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        BillingMode: PAY_PER_REQUEST

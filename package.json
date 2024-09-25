@@ -8,13 +8,11 @@
   },
   "author": "",
   "license": "ISC",
-  "devDependencies": {
-    "serverless": "^3.21.0",
-    "serverless-offline": "^14.3.2"
+  "dependencies": {
+    "aws-sdk": "^2.1691.0"
   },
-  "overrides": {
-    "serverless-offline": {
-      "serverless": "$serverless"
-    }
-  }
+  "devDependencies": {
+    "serverless": "^3.21.0"
+  },
+  "overrides": {}
 }
