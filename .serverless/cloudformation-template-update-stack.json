@@ -187,7 +187,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/crud-serverless-users/dev/1727320970263-2024-09-26T03:22:50.263Z/createUser.zip"
+          "S3Key": "serverless/crud-serverless-users/dev/1727385429967-2024-09-26T21:17:09.967Z/createUser.zip"
         },
         "Handler": "./createUsers/handler.createUser",
         "Runtime": "nodejs18.x",
@@ -217,7 +217,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/crud-serverless-users/dev/1727320970263-2024-09-26T03:22:50.263Z/getUser.zip"
+          "S3Key": "serverless/crud-serverless-users/dev/1727385429967-2024-09-26T21:17:09.967Z/getUser.zip"
         },
         "Handler": "./getUsers/handler.getUsers",
         "Runtime": "nodejs18.x",
@@ -247,7 +247,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/crud-serverless-users/dev/1727320970263-2024-09-26T03:22:50.263Z/updateUser.zip"
+          "S3Key": "serverless/crud-serverless-users/dev/1727385429967-2024-09-26T21:17:09.967Z/updateUser.zip"
         },
         "Handler": "./updateUser/handler.updateUser",
         "Runtime": "nodejs18.x",
@@ -277,7 +277,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/crud-serverless-users/dev/1727320970263-2024-09-26T03:22:50.263Z/deleteUser.zip"
+          "S3Key": "serverless/crud-serverless-users/dev/1727385429967-2024-09-26T21:17:09.967Z/deleteUser.zip"
         },
         "Handler": "./deleteUser/handler.deleteUser",
         "Runtime": "nodejs18.x",
@@ -300,44 +300,44 @@
         "DeleteUserLogGroup"
       ]
     },
-    "CreateUserLambdaVersionYJA3qj2bWQ8xpVWXosgUlAAmpHU6a5nfRKo4X2qU": {
+    "CreateUserLambdaVersionTUEXYHmsE1jQRH8oluFaRt9D98Zwy41wpqW4xF4tMY": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "CreateUserLambdaFunction"
         },
-        "CodeSha256": "+Z0NRHrI09PB7srIg5RhguH3ADQCKiZtBXhKBBIOL8E="
+        "CodeSha256": "GFgltRvqQWtZibTAjc715nS8aoqmp6bOXlIejkbJRic="
       }
     },
-    "UpdateUserLambdaVersionZcntIPVJ97SyavKXTSMxA7Mn3qdLmUIcSEIM0iZRY": {
-      "Type": "AWS::Lambda::Version",
-      "DeletionPolicy": "Retain",
-      "Properties": {
-        "FunctionName": {
-          "Ref": "UpdateUserLambdaFunction"
-        },
-        "CodeSha256": "+Z0NRHrI09PB7srIg5RhguH3ADQCKiZtBXhKBBIOL8E="
-      }
-    },
-    "GetUserLambdaVersionILAgHHSKdtwAtqHPebrNoiwf0KViHgE3kmEYYVlFc": {
+    "GetUserLambdaVersionxVxQR3NDgbc3MJ0aHafTbfaDyeMRpFizQBHjeNNuWM": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "GetUserLambdaFunction"
         },
-        "CodeSha256": "+Z0NRHrI09PB7srIg5RhguH3ADQCKiZtBXhKBBIOL8E="
+        "CodeSha256": "GFgltRvqQWtZibTAjc715nS8aoqmp6bOXlIejkbJRic="
       }
     },
-    "DeleteUserLambdaVersionmBoNhPO3yn6WK41QJDTjn95ienRKKes9m8ODaEloDk": {
+    "UpdateUserLambdaVersionaCn0ldLW76t1GYDDkMQwXIjnHwFakmlESl5q8ewE": {
+      "Type": "AWS::Lambda::Version",
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "FunctionName": {
+          "Ref": "UpdateUserLambdaFunction"
+        },
+        "CodeSha256": "GFgltRvqQWtZibTAjc715nS8aoqmp6bOXlIejkbJRic="
+      }
+    },
+    "DeleteUserLambdaVersionMU922anpf9r3JDFfRtCZTBOMZMeIrCiDkdhpNkypew": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "DeleteUserLambdaFunction"
         },
-        "CodeSha256": "+Z0NRHrI09PB7srIg5RhguH3ADQCKiZtBXhKBBIOL8E="
+        "CodeSha256": "GFgltRvqQWtZibTAjc715nS8aoqmp6bOXlIejkbJRic="
       }
     },
     "ApiGatewayRestApi": {
@@ -563,7 +563,7 @@
         "DeleteUserLambdaPermissionApiGateway"
       ]
     },
-    "ApiGatewayDeployment1727320965896": {
+    "ApiGatewayDeployment1727385416851": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -758,34 +758,34 @@
     "CreateUserLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "CreateUserLambdaVersionYJA3qj2bWQ8xpVWXosgUlAAmpHU6a5nfRKo4X2qU"
+        "Ref": "CreateUserLambdaVersionTUEXYHmsE1jQRH8oluFaRt9D98Zwy41wpqW4xF4tMY"
       },
       "Export": {
         "Name": "sls-crud-serverless-users-dev-CreateUserLambdaFunctionQualifiedArn"
       }
     },
-    "UpdateUserLambdaFunctionQualifiedArn": {
-      "Description": "Current Lambda function version",
-      "Value": {
-        "Ref": "UpdateUserLambdaVersionZcntIPVJ97SyavKXTSMxA7Mn3qdLmUIcSEIM0iZRY"
-      },
-      "Export": {
-        "Name": "sls-crud-serverless-users-dev-UpdateUserLambdaFunctionQualifiedArn"
-      }
-    },
     "GetUserLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GetUserLambdaVersionILAgHHSKdtwAtqHPebrNoiwf0KViHgE3kmEYYVlFc"
+        "Ref": "GetUserLambdaVersionxVxQR3NDgbc3MJ0aHafTbfaDyeMRpFizQBHjeNNuWM"
       },
       "Export": {
         "Name": "sls-crud-serverless-users-dev-GetUserLambdaFunctionQualifiedArn"
       }
     },
+    "UpdateUserLambdaFunctionQualifiedArn": {
+      "Description": "Current Lambda function version",
+      "Value": {
+        "Ref": "UpdateUserLambdaVersionaCn0ldLW76t1GYDDkMQwXIjnHwFakmlESl5q8ewE"
+      },
+      "Export": {
+        "Name": "sls-crud-serverless-users-dev-UpdateUserLambdaFunctionQualifiedArn"
+      }
+    },
     "DeleteUserLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "DeleteUserLambdaVersionmBoNhPO3yn6WK41QJDTjn95ienRKKes9m8ODaEloDk"
+        "Ref": "DeleteUserLambdaVersionMU922anpf9r3JDFfRtCZTBOMZMeIrCiDkdhpNkypew"
       },
       "Export": {
         "Name": "sls-crud-serverless-users-dev-DeleteUserLambdaFunctionQualifiedArn"
