@@ -10,35 +10,44 @@ provider:
       statements:
         - Effect: Allow
           Action: 'dynamodb:*'
+          # Agregramos el codigo arn al rol, el cual lo podemos encontrar en Dynamodb -> usersTable -> Información general -> Información adicional -> ARN
           Resource: arn:aws:dynamodb:us-east-1:471112938813:table/${self:provider.environment.USERS_TABLE}
   environment:
     # Establecemos nuestras variables de entorno para ser usadas como "self:provider..environment" o "process.env"
     USERS_TABLE: usersTable
 
+# Buenas practicas para reducir el tamano de las lambdas y reducir el tiempo de los deploys
+package:
+  # Cada lambda sera empaquetada de forma individual
+  individually: true
+  # Cuando hagamos el deploy excluiremos todo lo que este en node modules
+  patterns:
+    - '!node_modules'
+
 functions:
   createUser:
-    handler: handler.createUser
+    handler: ./createUsers/handler.createUser
     events:
       - http:
           path: users
           method: post
 
   getUser:
-    handler: handler.getUser
+    handler: ./getUsers/handler.getUsers
     events:
       - http:
           path: users/{id}
           method: get
 
   updateUser:
-    handler: handler.updateUser
+    handler: ./updateUser/handler.updateUser
     events:
       - http:
           path: users/{id}
           method: put
 
   deleteUser:
-    handler: handler.deleteUser
+    handler: ./deleteUser/handler.deleteUser
     events:
       - http:
           path: users/{id}

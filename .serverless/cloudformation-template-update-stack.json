@@ -187,9 +187,9 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/crud-serverless-users/dev/1727307858301-2024-09-25T23:44:18.301Z/crud-serverless-users.zip"
+          "S3Key": "serverless/crud-serverless-users/dev/1727320970263-2024-09-26T03:22:50.263Z/createUser.zip"
         },
-        "Handler": "handler.createUser",
+        "Handler": "./createUsers/handler.createUser",
         "Runtime": "nodejs18.x",
         "FunctionName": "crud-serverless-users-dev-createUser",
         "MemorySize": 1024,
@@ -217,9 +217,9 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/crud-serverless-users/dev/1727307858301-2024-09-25T23:44:18.301Z/crud-serverless-users.zip"
+          "S3Key": "serverless/crud-serverless-users/dev/1727320970263-2024-09-26T03:22:50.263Z/getUser.zip"
         },
-        "Handler": "handler.getUser",
+        "Handler": "./getUsers/handler.getUsers",
         "Runtime": "nodejs18.x",
         "FunctionName": "crud-serverless-users-dev-getUser",
         "MemorySize": 1024,
@@ -247,9 +247,9 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/crud-serverless-users/dev/1727307858301-2024-09-25T23:44:18.301Z/crud-serverless-users.zip"
+          "S3Key": "serverless/crud-serverless-users/dev/1727320970263-2024-09-26T03:22:50.263Z/updateUser.zip"
         },
-        "Handler": "handler.updateUser",
+        "Handler": "./updateUser/handler.updateUser",
         "Runtime": "nodejs18.x",
         "FunctionName": "crud-serverless-users-dev-updateUser",
         "MemorySize": 1024,
@@ -277,9 +277,9 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/crud-serverless-users/dev/1727307858301-2024-09-25T23:44:18.301Z/crud-serverless-users.zip"
+          "S3Key": "serverless/crud-serverless-users/dev/1727320970263-2024-09-26T03:22:50.263Z/deleteUser.zip"
         },
-        "Handler": "handler.deleteUser",
+        "Handler": "./deleteUser/handler.deleteUser",
         "Runtime": "nodejs18.x",
         "FunctionName": "crud-serverless-users-dev-deleteUser",
         "MemorySize": 1024,
@@ -300,44 +300,44 @@
         "DeleteUserLogGroup"
       ]
     },
-    "CreateUserLambdaVersionoApGeFvrPJXX02usektzNxZWOpWccAvVBFPlfoP7M": {
+    "CreateUserLambdaVersionYJA3qj2bWQ8xpVWXosgUlAAmpHU6a5nfRKo4X2qU": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "CreateUserLambdaFunction"
         },
-        "CodeSha256": "62wkioVoHa+TDkl5ikv3UX1j747dNoU3kbH2Vm3Ik3M="
+        "CodeSha256": "+Z0NRHrI09PB7srIg5RhguH3ADQCKiZtBXhKBBIOL8E="
       }
     },
-    "GetUserLambdaVersionU7zXiNmwnhSBMYONSBX4gALOlPkDN35Stcdl4spuYxE": {
-      "Type": "AWS::Lambda::Version",
-      "DeletionPolicy": "Retain",
-      "Properties": {
-        "FunctionName": {
-          "Ref": "GetUserLambdaFunction"
-        },
-        "CodeSha256": "62wkioVoHa+TDkl5ikv3UX1j747dNoU3kbH2Vm3Ik3M="
-      }
-    },
-    "UpdateUserLambdaVersionTRzu0P4BhlGGaiiZS66BeQlUNy4PhM8J3hmwbe68": {
+    "UpdateUserLambdaVersionZcntIPVJ97SyavKXTSMxA7Mn3qdLmUIcSEIM0iZRY": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "UpdateUserLambdaFunction"
         },
-        "CodeSha256": "62wkioVoHa+TDkl5ikv3UX1j747dNoU3kbH2Vm3Ik3M="
+        "CodeSha256": "+Z0NRHrI09PB7srIg5RhguH3ADQCKiZtBXhKBBIOL8E="
       }
     },
-    "DeleteUserLambdaVersionIPBiooEHAXTcA0FOWvAUgsoNjSwBllI9L0MYhkljPg": {
+    "GetUserLambdaVersionILAgHHSKdtwAtqHPebrNoiwf0KViHgE3kmEYYVlFc": {
+      "Type": "AWS::Lambda::Version",
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "FunctionName": {
+          "Ref": "GetUserLambdaFunction"
+        },
+        "CodeSha256": "+Z0NRHrI09PB7srIg5RhguH3ADQCKiZtBXhKBBIOL8E="
+      }
+    },
+    "DeleteUserLambdaVersionmBoNhPO3yn6WK41QJDTjn95ienRKKes9m8ODaEloDk": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "DeleteUserLambdaFunction"
         },
-        "CodeSha256": "62wkioVoHa+TDkl5ikv3UX1j747dNoU3kbH2Vm3Ik3M="
+        "CodeSha256": "+Z0NRHrI09PB7srIg5RhguH3ADQCKiZtBXhKBBIOL8E="
       }
     },
     "ApiGatewayRestApi": {
@@ -563,7 +563,7 @@
         "DeleteUserLambdaPermissionApiGateway"
       ]
     },
-    "ApiGatewayDeployment1727307851700": {
+    "ApiGatewayDeployment1727320965896": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -758,34 +758,34 @@
     "CreateUserLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "CreateUserLambdaVersionoApGeFvrPJXX02usektzNxZWOpWccAvVBFPlfoP7M"
+        "Ref": "CreateUserLambdaVersionYJA3qj2bWQ8xpVWXosgUlAAmpHU6a5nfRKo4X2qU"
       },
       "Export": {
         "Name": "sls-crud-serverless-users-dev-CreateUserLambdaFunctionQualifiedArn"
       }
     },
-    "GetUserLambdaFunctionQualifiedArn": {
-      "Description": "Current Lambda function version",
-      "Value": {
-        "Ref": "GetUserLambdaVersionU7zXiNmwnhSBMYONSBX4gALOlPkDN35Stcdl4spuYxE"
-      },
-      "Export": {
-        "Name": "sls-crud-serverless-users-dev-GetUserLambdaFunctionQualifiedArn"
-      }
-    },
     "UpdateUserLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "UpdateUserLambdaVersionTRzu0P4BhlGGaiiZS66BeQlUNy4PhM8J3hmwbe68"
+        "Ref": "UpdateUserLambdaVersionZcntIPVJ97SyavKXTSMxA7Mn3qdLmUIcSEIM0iZRY"
       },
       "Export": {
         "Name": "sls-crud-serverless-users-dev-UpdateUserLambdaFunctionQualifiedArn"
       }
     },
+    "GetUserLambdaFunctionQualifiedArn": {
+      "Description": "Current Lambda function version",
+      "Value": {
+        "Ref": "GetUserLambdaVersionILAgHHSKdtwAtqHPebrNoiwf0KViHgE3kmEYYVlFc"
+      },
+      "Export": {
+        "Name": "sls-crud-serverless-users-dev-GetUserLambdaFunctionQualifiedArn"
+      }
+    },
     "DeleteUserLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "DeleteUserLambdaVersionIPBiooEHAXTcA0FOWvAUgsoNjSwBllI9L0MYhkljPg"
+        "Ref": "DeleteUserLambdaVersionmBoNhPO3yn6WK41QJDTjn95ienRKKes9m8ODaEloDk"
       },
       "Export": {
         "Name": "sls-crud-serverless-users-dev-DeleteUserLambdaFunctionQualifiedArn"
