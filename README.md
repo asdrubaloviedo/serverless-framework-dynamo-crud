@@ -21,7 +21,7 @@ serverless deploy
 
 ## Contenido
 
-serverless, serverless framework, serverless-offline, lambda, api-gateway, CI/CD, GitHub Actions
+serverless framework, AWS(lambda, api-gateway), CI/CD(GitHub Actions), Jest
 
 ## Autores
 
