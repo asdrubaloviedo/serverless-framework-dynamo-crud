@@ -16,14 +16,6 @@ provider:
     # Establecemos nuestras variables de entorno para ser usadas como "self:provider..environment" o "process.env"
     USERS_TABLE: usersTable
 
-# Buenas practicas para reducir el tamano de las lambdas y reducir el tiempo de los deploys
-package:
-  # Cada lambda sera empaquetada de forma individual
-  individually: true
-  # Cuando hagamos el deploy excluiremos todo lo que este en node modules
-  patterns:
-    - '!node_modules'
-
 functions:
   createUser:
     handler: ./createUsers/handler.createUser
