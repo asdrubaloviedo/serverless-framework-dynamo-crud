@@ -15,7 +15,7 @@ jest.mock('aws-sdk', () => {
 });
 
 describe('createUser', () => {
-  it('should return 201 when user is created', async () => {
+  it('should return 201 when user is created.', async () => {
     const event = {
       body: JSON.stringify({
         name: 'John Doe',
@@ -34,7 +34,7 @@ describe('createUser', () => {
     expect(JSON.parse(result.body).email).toBe('john.doe@example.com');
   });
 
-  it('should return 500 when DynamoDB fails', async () => {
+  it('should return 500 when DynamoDB fails.', async () => {
     const event = {
       body: JSON.stringify({
         name: 'John Doe',
