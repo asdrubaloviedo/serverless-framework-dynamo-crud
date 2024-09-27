@@ -23,6 +23,9 @@ functions:
       - http:
           path: users
           method: post
+    package:
+      patterns:
+        - ./createUsers/handler.js
 
   getUser:
     handler: ./getUsers/handler.getUsers
@@ -30,6 +33,9 @@ functions:
       - http:
           path: users/{id}
           method: get
+    package:
+      patterns:
+        - ./getUsers/handler.js
 
   updateUser:
     handler: ./updateUser/handler.updateUser
@@ -37,6 +43,9 @@ functions:
       - http:
           path: users/{id}
           method: put
+    package:
+      patterns:
+        - ./updateUser/handler.js
 
   deleteUser:
     handler: ./deleteUser/handler.deleteUser
@@ -44,6 +53,9 @@ functions:
       - http:
           path: users/{id}
           method: delete
+    package:
+      patterns:
+        - ./deleteUser/handler.js
 
 resources:
   Resources:

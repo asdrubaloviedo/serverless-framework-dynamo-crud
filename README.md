@@ -2,8 +2,10 @@
 
 1. [Instalación](#instalación)
 2. [Levantamiento](#levantamiento)
-3. [Contenido](#contenido)
-4. [Autores](#autores)
+3. [Tests](#test)
+4. [CI/CD](#ci/cd)
+5. [Contenido](#contenido)
+6. [Autores](#autores)
 
 ## Instalación
 
@@ -13,10 +15,26 @@ npm install
 
 ## Levantamiento
 
-1.- Ambiente de desarrollo
+Levantamiento local
 
 ```bash
 serverless deploy
+```
+
+## Test
+
+Pruebas locales
+
+```bash
+npm run test
+```
+
+## CI/CD
+
+Esto instalara las dependencias, construira la app, ejecutara los test y hara el deploy a AWS
+
+```bash
+git push -u origin master
 ```
 
 ## Contenido
