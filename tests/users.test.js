@@ -12,5 +12,9 @@ test('createUser should return 201 when user is created', async () => {
   const result = await handler.createUser(event);
 
   expect(result.statusCode).toBe(201);
-  expect(JSON.parse(result.body).message).toBe('User created successfully');
+
+  const body = JSON.parse(result.body);
+  expect(body.name).toBe('John Doe');
+  expect(body.email).toBe('john.doe@example.com');
+  expect(body).toHaveProperty('id');
 });
