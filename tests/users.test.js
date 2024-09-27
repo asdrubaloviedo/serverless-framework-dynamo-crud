@@ -4,8 +4,8 @@ const handler = require('../createUsers/handler');
 test('createUser should return 201 when user is created', async () => {
   const event = {
     body: JSON.stringify({
-      id: '123',
-      name: 'John Doe'
+      name: 'John Doe',
+      email: 'john.doe@example.com'
     })
   };
 
