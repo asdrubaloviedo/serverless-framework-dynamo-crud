@@ -2,34 +2,43 @@ const AWS = require('aws-sdk');
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
 const crypto = require('crypto');
 
-const createUser = async (event) => {
-  const pk = crypto.randomBytes(20).toString('hex');
+// Función para formatear la respuesta HTTP
+const formatResponse = (statusCode, body) => ({
+  statusCode,
+  body: JSON.stringify(body)
+});
 
-  const data = JSON.parse(event.body);
+const createUser = async (event) => {
+  if (!event.body) {
+    return formatResponse(400, { error: 'Request body is required' });
+  }
+
+  const { name, email } = JSON.parse(event.body);
+
+  if (!name || !email) {
+    return formatResponse(400, { error: 'Name and email are required' });
+  }
+
+  const id = crypto.randomBytes(20).toString('hex');
+
   const params = {
     TableName: process.env.USERS_TABLE,
     Item: {
-      id: pk,
-      name: data.name,
-      email: data.email,
+      id,
+      name,
+      email,
       createdAt: new Date().toISOString()
     }
   };
 
   try {
     await dynamoDb.put(params).promise();
-    return {
-      statusCode: 201,
-      body: JSON.stringify(params.Item)
-    };
+    return formatResponse(201, params.Item);
   } catch (error) {
-    return {
-      statusCode: 500,
-      body: JSON.stringify({
-        error: 'Could not create user',
-        details: error.message
-      })
-    };
+    return formatResponse(500, {
+      error: 'Could not create user',
+      details: error.message
+    });
   }
 };
 

@@ -1,7 +1,17 @@
 const AWS = require('aws-sdk');
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
+// Función para formatear la respuesta HTTP
+const formatResponse = (statusCode, body) => ({
+  statusCode,
+  body: JSON.stringify(body)
+});
+
 const deleteUser = async (event) => {
+  if (!event.pathParameters.id) {
+    return formatResponse(400, { error: 'User ID is required' });
+  }
+
   const params = {
     TableName: process.env.USERS_TABLE,
     Key: {
@@ -11,15 +21,12 @@ const deleteUser = async (event) => {
 
   try {
     await dynamoDb.delete(params).promise();
-    return {
-      statusCode: 200,
-      body: JSON.stringify({ message: 'User deleted successfully' })
-    };
+    return formatResponse(200, { message: 'User deleted successfully' });
   } catch (error) {
-    return {
-      statusCode: 500,
-      body: JSON.stringify({ error: 'Could not delete user' })
-    };
+    return formatResponse(500, {
+      error: 'Could not delete user',
+      details: error.message
+    });
   }
 };
 

@@ -8,8 +8,10 @@
   },
   "author": "",
   "license": "ISC",
+  "dependencies": {
+    "aws-sdk": "^2.1691.0"
+  },
   "devDependencies": {
-    "aws-sdk": "^2.1691.0",
     "jest": "^29.7.0",
     "serverless": "^3.21.0"
   },

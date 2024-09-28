@@ -1,8 +1,23 @@
 const AWS = require('aws-sdk');
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
+// Función para formatear la respuesta HTTP
+const formatResponse = (statusCode, body) => ({
+  statusCode,
+  body: JSON.stringify(body)
+});
+
 const updateUser = async (event) => {
-  const data = JSON.parse(event.body);
+  if (!event.body) {
+    return formatResponse(400, { error: 'Request body is required' });
+  }
+
+  const { name, email } = JSON.parse(event.body);
+
+  if (!name || !email) {
+    return formatResponse(400, { error: 'Name and email are required' });
+  }
+
   const params = {
     TableName: process.env.USERS_TABLE,
     Key: {
@@ -13,23 +28,20 @@ const updateUser = async (event) => {
       '#name': 'name'
     },
     ExpressionAttributeValues: {
-      ':name': data.name,
-      ':email': data.email
+      ':name': name,
+      ':email': email
     },
     ReturnValues: 'ALL_NEW'
   };
 
   try {
     const result = await dynamoDb.update(params).promise();
-    return {
-      statusCode: 200,
-      body: JSON.stringify(result.Attributes)
-    };
+    return formatResponse(200, result.Attributes);
   } catch (error) {
-    return {
-      statusCode: 500,
-      body: JSON.stringify({ error: 'Could not update user' })
-    };
+    return formatResponse(500, {
+      error: 'Could not update user',
+      details: error.message
+    });
   }
 };
 
