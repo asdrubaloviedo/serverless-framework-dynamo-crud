@@ -147,7 +147,7 @@ layers:
     compatibleArchitectures:
       - x86_64
     package:
-      artifact: app/nodejs-layer.zip
+      artifact: nodejs-layer.zip
 
 resources:
   Resources:
