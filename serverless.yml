@@ -111,6 +111,9 @@ functions:
   # Lambda que se invocara al recibir un evento de creacion de S3
   thumGenerator:
     handler: ./thumbnail/handler.thumbGenerator
+    # Se utiliza una capa Lambda para compartir dependencias comunes
+    layers:
+      - !Ref BaseLambdaLayer
     events:
       - s3:
           # Nombre del bucket
@@ -121,11 +124,25 @@ functions:
           existing: true
           # Reglas del evento
           rules:
-            # Cada vez que se carge una imagen al directorio uploads se invocara la lambda
-            - prefix: uploads/
+            # Cada vez que se carge una imagen al directorio upload(de nuestra consola de S3 en AWS) se invocara la lambda
+            - prefix: upload/
     package:
       patterns:
         - ./thumbnail/handler.js
+
+# Define una capa Lambda reutilizable con las dependencias Node.js comunes. Mejora la eficiencia del despliegue.
+# Nota: En el README estan los comandos necesarios para crear/subir las lambdas layer
+layers:
+  base:
+    name: prd-dependencies
+    description: layer for nodejs prd dependencies
+    licenseInfo: MIT
+    compatibleRuntimes:
+      - nodejs18.x
+    compatibleArchitectures:
+      - x86_64
+    package:
+      artifact: nodejs-layer.zip
 
 resources:
   Resources:
