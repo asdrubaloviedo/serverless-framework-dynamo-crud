@@ -5,6 +5,8 @@ provider:
   runtime: nodejs18.x
   region: us-east-1
   stage: dev
+  package:
+    individually: true
   iam:
     role:
       statements:

@@ -38,7 +38,8 @@ jobs:
         run: |
           mkdir -p app/nodejs
           cp -R node_modules app/nodejs
-          cd app && zip -r nodejs-layer.zip .
+          cd app && zip -r nodejs-layer.zip nodejs
+          cd ..
 
       - name: Upload Layer to S3
         if: steps.cache-layer.outputs.cache-hit != 'true'
