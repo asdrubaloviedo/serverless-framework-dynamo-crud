@@ -32,7 +32,7 @@ npm run test
 
 ## Layers
 
-Estos comandos crearan los directorios necesarios para las lambda layers
+Estos comandos crearan los directorios necesarios para las lambda layers de forma local
 
 ```
 npm i --omit=dev
@@ -52,6 +52,9 @@ aws lambda publish-layer-version --layer-name my-first-layer \
 --compatible-runtimes nodejs18.x \
 --compatible-architectures x86_64 \
 ```
+
+Sin embargo este proceso esta automatizado en el Job "package-layer" de deploy.yml para que no sea necesario
+hacer nada de esto a mano si no lo deseamos
 
 ## CI/CD
 

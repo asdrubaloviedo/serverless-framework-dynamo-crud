@@ -24,7 +24,7 @@ jobs:
         id: cache-layer
         uses: actions/cache@v3
         with:
-          path: layer/nodejs-layer.zip
+          path: app/nodejs-layer.zip
           key: node-layer-${{ hashFiles('package-lock.json') }}
           restore-keys: |
             node-layer-
@@ -36,7 +36,7 @@ jobs:
       - name: Package Lambda Layer
         if: steps.cache-layer.outputs.cache-hit != 'true'
         run: |
-          mkdir -p layer/nodejs
+          mkdir -p app/nodejs
           cp -R node_modules layer/nodejs
           cd layer && zip -r nodejs-layer.zip .
 
