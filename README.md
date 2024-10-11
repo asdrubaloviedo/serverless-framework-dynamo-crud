@@ -39,7 +39,7 @@ git push -u origin master
 
 ## Contenido
 
-serverless framework, AWS(lambda, api-gateway), CI/CD(GitHub Actions), Jest
+serverless framework, AWS(lambda, api-gateway, S3), CI/CD(GitHub Actions), Jest
 
 ## Autores
 

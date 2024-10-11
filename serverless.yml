@@ -12,9 +12,13 @@ provider:
           Action: 'dynamodb:*'
           # Agregramos el codigo arn al rol, el cual lo podemos encontrar en Dynamodb -> usersTable -> Información general -> Información adicional -> ARN
           Resource: arn:aws:dynamodb:us-east-1:471112938813:table/${self:provider.environment.USERS_TABLE}
+        - Effect: Allow
+          Action: 's3:*'
+          Resource: arn:aws:s3:::${self:provider.environment.BUCKED}/*
   environment:
     # Establecemos nuestras variables de entorno para ser usadas como "self:provider..environment" o "process.env"
     USERS_TABLE: usersTable
+    BUCKED: bucket-serverless-course-232132
 
 functions:
   createUser:
@@ -23,6 +27,12 @@ functions:
       - http:
           path: users
           method: post
+          # Especificamos configuraciones adicionales al request
+          request:
+            # Especificamos configuraciones adicionales a los parametros usando un schema
+            schemas:
+              # Especificamos que el schema tendran el formato json
+              application/json: ${file(./schemas/user-schema.json)}
     package:
       patterns:
         - ./createUsers/handler.js
@@ -33,6 +43,13 @@ functions:
       - http:
           path: users/{id}
           method: get
+          # Especificamos configuraciones adicionales al request
+          request:
+            # Especificamos configuraciones adicionales a los parametros
+            parameters:
+              paths:
+                # Especificamos que el id sera requerido
+                id: true
     package:
       patterns:
         - ./getUsers/handler.js
@@ -43,6 +60,17 @@ functions:
       - http:
           path: users/{id}
           method: put
+          # Especificamos configuraciones adicionales al request
+          request:
+            # Especificamos configuraciones adicionales a los parametros
+            parameters:
+              paths:
+                # Especificamos que el id sera requerido
+                id: true
+            # Especificamos configuraciones adicionales a los parametros usando un schema
+            schemas:
+              # Especificamos que el schema tendran el formato json
+              application/json: ${file(./schemas/user-schema.json)}
     package:
       patterns:
         - ./updateUser/handler.js
@@ -53,12 +81,55 @@ functions:
       - http:
           path: users/{id}
           method: delete
+          # Especificamos configuraciones adicionales al request
+          request:
+            # Especificamos configuraciones adicionales a los parametros
+            parameters:
+              paths:
+                # Especificamos que el id sera requerido
+                id: true
     package:
       patterns:
         - ./deleteUser/handler.js
 
+  signedUrl:
+    handler: ./signedUrl/handler.signedS3Url
+    events:
+      - http:
+          path: signedurl
+          method: get
+          # Especificamos configuraciones adicionales al request
+          request:
+            # Especificamos configuraciones adicionales a los parametros
+            parameters:
+              querystrings:
+                filename: true
+    package:
+      patterns:
+        - ./signedUrl/handler.js
+
+  # Lambda que se invocara al recibir un evento de creacion de S3
+  thumGenerator:
+    handler: ./thumbnail/handler.thumbGenerator
+    events:
+      - s3:
+          # Nombre del bucket
+          bucket: bucket-serverless-course-232132
+          # Evento de s3 que invocara a la lambda
+          event: s3:ObjectCreated:*
+          # No queremos crear un bucket nuevo, usaremos el ya existente
+          existing: true
+          # Reglas del evento
+          rules:
+            # Cada vez que se carge una imagen al directorio uploads se invocara la lambda
+            - prefix: uploads/
+    package:
+      patterns:
+        - ./thumbnail/handler.js
+
 resources:
   Resources:
+    # Creamos el recurso de Dynamo
     usersTable:
       Type: AWS::DynamoDB::Table
       Properties:
@@ -70,3 +141,30 @@ resources:
           - AttributeName: id
             KeyType: HASH
         BillingMode: PAY_PER_REQUEST
+    # Creamos el recurso de S3
+    S3Bucket:
+      Type: 'AWS::S3::Bucket'
+      Properties:
+        # Sera de acceso publico
+        PublicAccessBlockConfiguration:
+          BlockPublicAcls: false
+          BlockPublicPolicy: false
+        # Nombre unico global
+        BucketName: bucket-serverless-course-232132
+    # Creamos la política de nuestro S3
+    SampleBucketPolicy:
+      Type: AWS::S3::BucketPolicy
+      Properties:
+        Bucket: !Ref S3Bucket
+        PolicyDocument:
+          Version: '2012-10-17'
+          Statement:
+            - Action:
+                - 's3:GetObject'
+              Effect: Allow
+              Resource: !Join
+                - ''
+                - - 'arn:aws:s3:::'
+                  - !Ref S3Bucket
+                  - /*
+              Principal: '*'

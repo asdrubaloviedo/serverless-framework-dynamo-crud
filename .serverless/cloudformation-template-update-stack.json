@@ -95,6 +95,12 @@
         "LogGroupName": "/aws/lambda/crud-serverless-users-dev-deleteUser"
       }
     },
+    "SignedUrlLogGroup": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupName": "/aws/lambda/crud-serverless-users-dev-signedUrl"
+      }
+    },
     "IamRoleLambdaExecution": {
       "Type": "AWS::IAM::Role",
       "Properties": {
@@ -159,6 +165,13 @@
                     "dynamodb:*"
                   ],
                   "Resource": "arn:aws:dynamodb:us-east-1:471112938813:table/usersTable"
+                },
+                {
+                  "Effect": "Allow",
+                  "Action": [
+                    "s3:*"
+                  ],
+                  "Resource": "arn:aws:s3:::bucket-serverless-course-232132/*"
                 }
               ]
             }
@@ -187,7 +200,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/crud-serverless-users/dev/1727451891706-2024-09-27T15:44:51.706Z/crud-serverless-users.zip"
+          "S3Key": "serverless/crud-serverless-users/dev/1728272940301-2024-10-07T03:49:00.301Z/crud-serverless-users.zip"
         },
         "Handler": "./createUsers/handler.createUser",
         "Runtime": "nodejs18.x",
@@ -196,7 +209,8 @@
         "Timeout": 6,
         "Environment": {
           "Variables": {
-            "USERS_TABLE": "usersTable"
+            "USERS_TABLE": "usersTable",
+            "BUCKED": "bucket-serverless-course-232132"
           }
         },
         "Role": {
@@ -217,7 +231,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/crud-serverless-users/dev/1727451891706-2024-09-27T15:44:51.706Z/crud-serverless-users.zip"
+          "S3Key": "serverless/crud-serverless-users/dev/1728272940301-2024-10-07T03:49:00.301Z/crud-serverless-users.zip"
         },
         "Handler": "./getUsers/handler.getUsers",
         "Runtime": "nodejs18.x",
@@ -226,7 +240,8 @@
         "Timeout": 6,
         "Environment": {
           "Variables": {
-            "USERS_TABLE": "usersTable"
+            "USERS_TABLE": "usersTable",
+            "BUCKED": "bucket-serverless-course-232132"
           }
         },
         "Role": {
@@ -247,7 +262,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/crud-serverless-users/dev/1727451891706-2024-09-27T15:44:51.706Z/crud-serverless-users.zip"
+          "S3Key": "serverless/crud-serverless-users/dev/1728272940301-2024-10-07T03:49:00.301Z/crud-serverless-users.zip"
         },
         "Handler": "./updateUser/handler.updateUser",
         "Runtime": "nodejs18.x",
@@ -256,7 +271,8 @@
         "Timeout": 6,
         "Environment": {
           "Variables": {
-            "USERS_TABLE": "usersTable"
+            "USERS_TABLE": "usersTable",
+            "BUCKED": "bucket-serverless-course-232132"
           }
         },
         "Role": {
@@ -277,7 +293,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/crud-serverless-users/dev/1727451891706-2024-09-27T15:44:51.706Z/crud-serverless-users.zip"
+          "S3Key": "serverless/crud-serverless-users/dev/1728272940301-2024-10-07T03:49:00.301Z/crud-serverless-users.zip"
         },
         "Handler": "./deleteUser/handler.deleteUser",
         "Runtime": "nodejs18.x",
@@ -286,7 +302,8 @@
         "Timeout": 6,
         "Environment": {
           "Variables": {
-            "USERS_TABLE": "usersTable"
+            "USERS_TABLE": "usersTable",
+            "BUCKED": "bucket-serverless-course-232132"
           }
         },
         "Role": {
@@ -300,44 +317,85 @@
         "DeleteUserLogGroup"
       ]
     },
-    "CreateUserLambdaVersionzfiokS7uja5MBhRthlZULKnBtzFq7Iv9igj1SExM": {
+    "SignedUrlLambdaFunction": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Code": {
+          "S3Bucket": {
+            "Ref": "ServerlessDeploymentBucket"
+          },
+          "S3Key": "serverless/crud-serverless-users/dev/1728272940301-2024-10-07T03:49:00.301Z/crud-serverless-users.zip"
+        },
+        "Handler": "./signedUrl/handler.signedS3Url",
+        "Runtime": "nodejs18.x",
+        "FunctionName": "crud-serverless-users-dev-signedUrl",
+        "MemorySize": 1024,
+        "Timeout": 6,
+        "Environment": {
+          "Variables": {
+            "USERS_TABLE": "usersTable",
+            "BUCKED": "bucket-serverless-course-232132"
+          }
+        },
+        "Role": {
+          "Fn::GetAtt": [
+            "IamRoleLambdaExecution",
+            "Arn"
+          ]
+        }
+      },
+      "DependsOn": [
+        "SignedUrlLogGroup"
+      ]
+    },
+    "CreateUserLambdaVersionTikzeXPCSTyyWMrsEXFJdEFKb8foIRp3B59ZTfeayw": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "CreateUserLambdaFunction"
         },
-        "CodeSha256": "4svkPluc+zkNdSl6HCjxW7bPBLVmu2hQHpzXXOzalRI="
+        "CodeSha256": "cE3TaQFuwf0HWRU2n/8ghO0ZC/p/BYFcpEqienBuSM4="
       }
     },
-    "GetUserLambdaVersion22Z5DdrQJoxW1TZfGyVGEH1TKInY5Sbky76JfvinBc": {
+    "GetUserLambdaVersioni0iXQ0p1CZhFNElmApIUGw8HANDKcfgujKVh0ZeOAhs": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "GetUserLambdaFunction"
         },
-        "CodeSha256": "4svkPluc+zkNdSl6HCjxW7bPBLVmu2hQHpzXXOzalRI="
+        "CodeSha256": "cE3TaQFuwf0HWRU2n/8ghO0ZC/p/BYFcpEqienBuSM4="
       }
     },
-    "UpdateUserLambdaVersionloAbvHuqtRwA8D08zVAc3jJmpfELVCPMNLJN3c1va8": {
+    "UpdateUserLambdaVersionj0jgEyhsrWC5ti49hSmix0C5Xb5pEAItLMIKXVRq0": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "UpdateUserLambdaFunction"
         },
-        "CodeSha256": "4svkPluc+zkNdSl6HCjxW7bPBLVmu2hQHpzXXOzalRI="
+        "CodeSha256": "cE3TaQFuwf0HWRU2n/8ghO0ZC/p/BYFcpEqienBuSM4="
       }
     },
-    "DeleteUserLambdaVersionI9yQPA6dhejNzixa2cSV5p757kmR5CNPcnHuvXLCXps": {
+    "DeleteUserLambdaVersionJwLv0RWaRWiuYtz191pPaPr89RFfvKUvKEUJt0fzeU0": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "DeleteUserLambdaFunction"
         },
-        "CodeSha256": "4svkPluc+zkNdSl6HCjxW7bPBLVmu2hQHpzXXOzalRI="
+        "CodeSha256": "cE3TaQFuwf0HWRU2n/8ghO0ZC/p/BYFcpEqienBuSM4="
+      }
+    },
+    "SignedUrlLambdaVersionMnfr65z5Gx7TOhML32Tf4oCNmCxHMZh6h9ECQEVA8W0": {
+      "Type": "AWS::Lambda::Version",
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "FunctionName": {
+          "Ref": "SignedUrlLambdaFunction"
+        },
+        "CodeSha256": "cE3TaQFuwf0HWRU2n/8ghO0ZC/p/BYFcpEqienBuSM4="
       }
     },
     "ApiGatewayRestApi": {
@@ -374,6 +432,21 @@
           "Ref": "ApiGatewayResourceUsers"
         },
         "PathPart": "{id}",
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      }
+    },
+    "ApiGatewayResourceSignedurl": {
+      "Type": "AWS::ApiGateway::Resource",
+      "Properties": {
+        "ParentId": {
+          "Fn::GetAtt": [
+            "ApiGatewayRestApi",
+            "RootResourceId"
+          ]
+        },
+        "PathPart": "signedurl",
         "RestApiId": {
           "Ref": "ApiGatewayRestApi"
         }
@@ -419,7 +492,15 @@
             ]
           }
         },
-        "MethodResponses": []
+        "MethodResponses": [],
+        "RequestValidatorId": {
+          "Ref": "ApiGatewayCrudserverlessusersRequestValidator"
+        },
+        "RequestModels": {
+          "application/json": {
+            "Ref": "ApiGatewayMethodUsersPostApplicationJsonModel"
+          }
+        }
       },
       "DependsOn": [
         "CreateUserLambdaPermissionApiGateway"
@@ -429,7 +510,9 @@
       "Type": "AWS::ApiGateway::Method",
       "Properties": {
         "HttpMethod": "GET",
-        "RequestParameters": {},
+        "RequestParameters": {
+          "method.request.path.id": true
+        },
         "ResourceId": {
           "Ref": "ApiGatewayResourceUsersIdVar"
         },
@@ -465,7 +548,10 @@
             ]
           }
         },
-        "MethodResponses": []
+        "MethodResponses": [],
+        "RequestValidatorId": {
+          "Ref": "ApiGatewayCrudserverlessusersRequestValidator"
+        }
       },
       "DependsOn": [
         "GetUserLambdaPermissionApiGateway"
@@ -475,7 +561,9 @@
       "Type": "AWS::ApiGateway::Method",
       "Properties": {
         "HttpMethod": "PUT",
-        "RequestParameters": {},
+        "RequestParameters": {
+          "method.request.path.id": true
+        },
         "ResourceId": {
           "Ref": "ApiGatewayResourceUsersIdVar"
         },
@@ -511,7 +599,15 @@
             ]
           }
         },
-        "MethodResponses": []
+        "MethodResponses": [],
+        "RequestValidatorId": {
+          "Ref": "ApiGatewayCrudserverlessusersRequestValidator"
+        },
+        "RequestModels": {
+          "application/json": {
+            "Ref": "ApiGatewayMethodUsersIdVarPutApplicationJsonModel"
+          }
+        }
       },
       "DependsOn": [
         "UpdateUserLambdaPermissionApiGateway"
@@ -521,7 +617,9 @@
       "Type": "AWS::ApiGateway::Method",
       "Properties": {
         "HttpMethod": "DELETE",
-        "RequestParameters": {},
+        "RequestParameters": {
+          "method.request.path.id": true
+        },
         "ResourceId": {
           "Ref": "ApiGatewayResourceUsersIdVar"
         },
@@ -557,13 +655,144 @@
             ]
           }
         },
-        "MethodResponses": []
+        "MethodResponses": [],
+        "RequestValidatorId": {
+          "Ref": "ApiGatewayCrudserverlessusersRequestValidator"
+        }
       },
       "DependsOn": [
         "DeleteUserLambdaPermissionApiGateway"
       ]
     },
-    "ApiGatewayDeployment1727451881362": {
+    "ApiGatewayMethodSignedurlGet": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "HttpMethod": "GET",
+        "RequestParameters": {
+          "method.request.querystring.filename": true
+        },
+        "ResourceId": {
+          "Ref": "ApiGatewayResourceSignedurl"
+        },
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        },
+        "ApiKeyRequired": false,
+        "AuthorizationType": "NONE",
+        "Integration": {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition"
+                },
+                ":apigateway:",
+                {
+                  "Ref": "AWS::Region"
+                },
+                ":lambda:path/2015-03-31/functions/",
+                {
+                  "Fn::GetAtt": [
+                    "SignedUrlLambdaFunction",
+                    "Arn"
+                  ]
+                },
+                "/invocations"
+              ]
+            ]
+          }
+        },
+        "MethodResponses": [],
+        "RequestValidatorId": {
+          "Ref": "ApiGatewayCrudserverlessusersRequestValidator"
+        }
+      },
+      "DependsOn": [
+        "SignedUrlLambdaPermissionApiGateway"
+      ]
+    },
+    "ApiGatewayCrudserverlessusersRequestValidator": {
+      "Type": "AWS::ApiGateway::RequestValidator",
+      "Properties": {
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        },
+        "ValidateRequestBody": true,
+        "ValidateRequestParameters": true,
+        "Name": "crud-serverless-users-dev | Validate request body and querystring parameters"
+      }
+    },
+    "ApiGatewayMethodUsersPostApplicationJsonModel": {
+      "Type": "AWS::ApiGateway::Model",
+      "Properties": {
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        },
+        "ContentType": "application/json",
+        "Schema": {
+          "$schema": "http://json-schema.org/draft-04/schema",
+          "title": "User",
+          "type": "object",
+          "required": [
+            "name",
+            "email"
+          ],
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "The person's first name."
+            },
+            "email": {
+              "type": "string",
+              "description": "The person's Email."
+            },
+            "edad": {
+              "type": "integer",
+              "description": "Age in years",
+              "minimum": 18
+            }
+          }
+        }
+      }
+    },
+    "ApiGatewayMethodUsersIdVarPutApplicationJsonModel": {
+      "Type": "AWS::ApiGateway::Model",
+      "Properties": {
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        },
+        "ContentType": "application/json",
+        "Schema": {
+          "$schema": "http://json-schema.org/draft-04/schema",
+          "title": "User",
+          "type": "object",
+          "required": [
+            "name",
+            "email"
+          ],
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "The person's first name."
+            },
+            "email": {
+              "type": "string",
+              "description": "The person's Email."
+            },
+            "edad": {
+              "type": "integer",
+              "description": "Age in years",
+              "minimum": 18
+            }
+          }
+        }
+      }
+    },
+    "ApiGatewayDeployment1728272924266": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -575,7 +804,8 @@
         "ApiGatewayMethodUsersPost",
         "ApiGatewayMethodUsersIdVarGet",
         "ApiGatewayMethodUsersIdVarPut",
-        "ApiGatewayMethodUsersIdVarDelete"
+        "ApiGatewayMethodUsersIdVarDelete",
+        "ApiGatewayMethodSignedurlGet"
       ]
     },
     "CreateUserLambdaPermissionApiGateway": {
@@ -726,6 +956,43 @@
         }
       }
     },
+    "SignedUrlLambdaPermissionApiGateway": {
+      "Type": "AWS::Lambda::Permission",
+      "Properties": {
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "SignedUrlLambdaFunction",
+            "Arn"
+          ]
+        },
+        "Action": "lambda:InvokeFunction",
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition"
+              },
+              ":execute-api:",
+              {
+                "Ref": "AWS::Region"
+              },
+              ":",
+              {
+                "Ref": "AWS::AccountId"
+              },
+              ":",
+              {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "/*/*"
+            ]
+          ]
+        }
+      }
+    },
     "usersTable": {
       "Type": "AWS::DynamoDB::Table",
       "Properties": {
@@ -744,6 +1011,48 @@
         ],
         "BillingMode": "PAY_PER_REQUEST"
       }
+    },
+    "S3Bucket": {
+      "Type": "AWS::S3::Bucket",
+      "Properties": {
+        "PublicAccessBlockConfiguration": {
+          "BlockPublicAcls": false,
+          "BlockPublicPolicy": false
+        },
+        "BucketName": "bucket-serverless-course-232132"
+      }
+    },
+    "SampleBucketPolicy": {
+      "Type": "AWS::S3::BucketPolicy",
+      "Properties": {
+        "Bucket": {
+          "Ref": "S3Bucket"
+        },
+        "PolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Action": [
+                "s3:GetObject"
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:aws:s3:::",
+                    {
+                      "Ref": "S3Bucket"
+                    },
+                    "/*"
+                  ]
+                ]
+              },
+              "Principal": "*"
+            }
+          ]
+        }
+      }
     }
   },
   "Outputs": {
@@ -758,7 +1067,7 @@
     "CreateUserLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "CreateUserLambdaVersionzfiokS7uja5MBhRthlZULKnBtzFq7Iv9igj1SExM"
+        "Ref": "CreateUserLambdaVersionTikzeXPCSTyyWMrsEXFJdEFKb8foIRp3B59ZTfeayw"
       },
       "Export": {
         "Name": "sls-crud-serverless-users-dev-CreateUserLambdaFunctionQualifiedArn"
@@ -767,7 +1076,7 @@
     "GetUserLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GetUserLambdaVersion22Z5DdrQJoxW1TZfGyVGEH1TKInY5Sbky76JfvinBc"
+        "Ref": "GetUserLambdaVersioni0iXQ0p1CZhFNElmApIUGw8HANDKcfgujKVh0ZeOAhs"
       },
       "Export": {
         "Name": "sls-crud-serverless-users-dev-GetUserLambdaFunctionQualifiedArn"
@@ -776,7 +1085,7 @@
     "UpdateUserLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "UpdateUserLambdaVersionloAbvHuqtRwA8D08zVAc3jJmpfELVCPMNLJN3c1va8"
+        "Ref": "UpdateUserLambdaVersionj0jgEyhsrWC5ti49hSmix0C5Xb5pEAItLMIKXVRq0"
       },
       "Export": {
         "Name": "sls-crud-serverless-users-dev-UpdateUserLambdaFunctionQualifiedArn"
@@ -785,10 +1094,19 @@
     "DeleteUserLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "DeleteUserLambdaVersionI9yQPA6dhejNzixa2cSV5p757kmR5CNPcnHuvXLCXps"
+        "Ref": "DeleteUserLambdaVersionJwLv0RWaRWiuYtz191pPaPr89RFfvKUvKEUJt0fzeU0"
       },
       "Export": {
         "Name": "sls-crud-serverless-users-dev-DeleteUserLambdaFunctionQualifiedArn"
+      }
+    },
+    "SignedUrlLambdaFunctionQualifiedArn": {
+      "Description": "Current Lambda function version",
+      "Value": {
+        "Ref": "SignedUrlLambdaVersionMnfr65z5Gx7TOhML32Tf4oCNmCxHMZh6h9ECQEVA8W0"
+      },
+      "Export": {
+        "Name": "sls-crud-serverless-users-dev-SignedUrlLambdaFunctionQualifiedArn"
       }
     },
     "ServiceEndpoint": {
