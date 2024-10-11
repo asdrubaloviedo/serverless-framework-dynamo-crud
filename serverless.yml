@@ -15,7 +15,7 @@ provider:
         - Effect: Allow
           Action: 's3:*'
           Resource: arn:aws:s3:::${self:provider.environment.BUCKED}/*
-         - Effect: Allow
+        - Effect: Allow
           Action:
             - 's3:PutObject'
             - 's3:CreateMultipartUpload'
