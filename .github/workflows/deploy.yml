@@ -43,7 +43,7 @@ jobs:
       - name: Upload Layer to S3
         if: steps.cache-layer.outputs.cache-hit != 'true'
         run: |
-          aws s3 cp layer/nodejs-layer.zip s3://your-layer-bucket-name/nodejs-layer.zip
+          aws s3 cp layer/nodejs-layer.zip s3://bucket-serverless-course-232132/nodejs-layer.zip
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}

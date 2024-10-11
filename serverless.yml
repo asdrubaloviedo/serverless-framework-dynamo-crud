@@ -15,6 +15,11 @@ provider:
         - Effect: Allow
           Action: 's3:*'
           Resource: arn:aws:s3:::${self:provider.environment.BUCKED}/*
+         - Effect: Allow
+          Action:
+            - 's3:PutObject'
+            - 's3:CreateMultipartUpload'
+          Resource: arn:aws:s3:::bucket-serverless-course-232132/*
   environment:
     # Establecemos nuestras variables de entorno para ser usadas como "self:provider..environment" o "process.env"
     USERS_TABLE: usersTable
