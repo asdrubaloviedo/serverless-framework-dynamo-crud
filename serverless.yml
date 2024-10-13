@@ -5,6 +5,9 @@ provider:
   runtime: nodejs18.x
   region: us-east-1
   stage: dev
+  apiGateway:
+    apiKeys:
+      - crud-serverless-users-apikeys
   iam:
     role:
       statements:
@@ -38,6 +41,8 @@ functions:
             schemas:
               # Especificamos que el schema tendran el formato json
               application/json: ${file(./schemas/user-schema.json)}
+          # Seguridad: Esta api solo sera accecible a traves de APIKeys
+          private: true
     package:
       patterns:
         - ./createUsers/handler.js
