@@ -5,7 +5,7 @@ provider:
   runtime: nodejs18.x
   region: us-east-1
   stage: dev
-  # Especificaciones de seguridad para nuestras APIS
+  # Especificaciones de seguridad para nuestras APIS gestionadas por ApiGateway
   apiGateway:
     # Las rutas privadas seran accecibles a traves de APIKey
     apiKeys:
@@ -31,6 +31,12 @@ provider:
     BUCKED: bucket-serverless-course-232132
 
 functions:
+  custom-authorizer:
+    handler: ./authorizer/handler.authorize
+    package:
+      patterns:
+        - ./authorizer/handler.js
+
   createUser:
     handler: ./createUsers/handler.createUser
     events:
@@ -55,6 +61,11 @@ functions:
       - http:
           path: users/{id}
           method: get
+          # Seguridad: Esta api solo sera accecible a traves de un custom authorizer
+          authorizer:
+            name: custom-authorizer
+            # Si una persona ya habia usado el token de forma valida le extendemos la vida util del mismo por 15 segundos
+            resultTtlInSeconds: 15
           # Especificamos configuraciones adicionales al request
           request:
             # Especificamos configuraciones adicionales a los parametros
