@@ -4,10 +4,7 @@ const authorize = async (event, context) => {
   let minutes = date.getMinutes();
   let hour = date.getHours();
   // A todas las solicitudes que tengan el token SECRET_EGG y que no haya pasado mas de 1 minuto
-  if (
-    event.authorizationToken ===
-    `Bearer ${process.env.SECRET_EGG}-${hour}-${minutes}`
-  ) {
+  if (event.authorizationToken === `Bearer ${process.env.SECRET_EGG}`) {
     //Les permitimos usar las apis
     return {
       principalId: 'anonymous',
