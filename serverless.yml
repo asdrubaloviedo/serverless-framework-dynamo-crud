@@ -5,7 +5,9 @@ provider:
   runtime: nodejs18.x
   region: us-east-1
   stage: dev
+  # Especificaciones de seguridad para nuestras APIS
   apiGateway:
+    # Las rutas privadas seran accecibles a traves de APIKey
     apiKeys:
       - crud-serverless-users-apikeys
   iam:
