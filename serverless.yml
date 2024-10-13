@@ -61,11 +61,13 @@ functions:
       - http:
           path: users/{id}
           method: get
+          ### Aun no funciona ###
           # Seguridad: Esta api solo sera accecible a traves de un custom authorizer
-          authorizer:
-            name: custom-authorizer
-            # Si una persona ya habia usado el token de forma valida le extendemos la vida util del mismo por 15 segundos
-            resultTtlInSeconds: 15
+          # authorizer:
+          #   name: custom-authorizer
+          #   # Si una persona ya habia usado el token de forma valida le extendemos la vida util del mismo por 15 segundos
+          #   resultTtlInSeconds: 15
+          ### ###
           # Especificamos configuraciones adicionales al request
           request:
             # Especificamos configuraciones adicionales a los parametros
