@@ -27,6 +27,7 @@ const createUser = async (event) => {
       id,
       name,
       email,
+      likes: 0,
       createdAt: new Date().toISOString()
     }
   };
