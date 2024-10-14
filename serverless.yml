@@ -224,7 +224,7 @@ constructs:
     worker:
       handler: ./likeuser/handler.likeuser
       # # Solo pueden existir 10 lambdas a la vez
-      # reservedConcurrency: 10
+      # reservedConcurrency: 10  # Esto no cae en la capa gratis asi que por eso se comento
       package:
         patterns:
           - ./likeuser/handler.js
@@ -252,7 +252,7 @@ custom:
           template:
             # `success` is used when the integration response is 200
             success: |-
-              { "message: "accepted" }
+              { "message": "accepted" }
             # `clientError` is used when the integration response is 400
             clientError: |-
               { "message": "there is an error in your request" }
