@@ -223,8 +223,8 @@ constructs:
     # Le asignamos una lambda worker
     worker:
       handler: ./likeuser/handler.likeuser
-      # Solo puede existir una lambda a la vez
-      reservedConcurrency: 1
+      # Solo pueden existir 10 lambdas a la vez
+      reservedConcurrency: 10
       package:
         patterns:
           - ./likeuser/handler.js
