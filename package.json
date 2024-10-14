@@ -14,7 +14,9 @@
   },
   "devDependencies": {
     "jest": "^29.7.0",
-    "serverless": "^3.21.0"
+    "serverless": "^3.21.0",
+    "serverless-apigateway-service-proxy": "^2.2.1",
+    "serverless-lift": "^1.30.2"
   },
   "overrides": {}
 }

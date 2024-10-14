@@ -210,3 +210,51 @@ resources:
                   - !Ref S3Bucket
                   - /*
               Principal: '*'
+
+plugins:
+  - serverless-apigateway-service-proxy
+  - serverless-lift
+
+# Configuraciones personalizadas del plugin "serverless-lift"
+constructs:
+  # Creamos una cola
+  sqs-queue:
+    type: queue
+    # Le asignamos una lambda worker
+    worker:
+      handler: ./likeuser/handler.likeuser
+      # Solo puede existir una lambda a la vez
+      reservedConcurrency: 1
+      package:
+        patterns:
+          - ./likeuser/handler.js
+    # Especificamos que la lambda consumira los elementos de la cola de uno en uno
+    batchSize: 1
+    extensions:
+      queue:
+        Properties:
+          # Nuestra cola se llamara likequeue
+          QueueName: likequeue
+
+# Configuraciones personalizadas
+custom:
+  # Usamos un plugin para conectar nuestro ApiGateway con otros servicios de AWS(Es como una segunda manera trabajar)
+  apiGatewayServiceProxies:
+    # Servicio con el que conectaremos a nuestro ApiGateway(SQS en este caso)
+    - sqs:
+        path: /likeuser
+        method: post
+        # La cola a la cual nos conectaremos se llama likequeue
+        queueName: likequeue
+        cors: true
+        response:
+          template:
+            # `success` is used when the integration response is 200
+            success: |-
+              { "message: "accepted" }
+            # `clientError` is used when the integration response is 400
+            clientError: |-
+              { "message": "there is an error in your request" }
+            # `serverError` is used when the integration response is 500
+            serverError: |-
+              { "message": "there was an error handling your request" }
