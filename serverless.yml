@@ -223,8 +223,8 @@ constructs:
     # Le asignamos una lambda worker
     worker:
       handler: ./likeuser/handler.likeuser
-      # Solo pueden existir 10 lambdas a la vez
-      reservedConcurrency: 10
+      # # Solo pueden existir 10 lambdas a la vez
+      # reservedConcurrency: 10
       package:
         patterns:
           - ./likeuser/handler.js
@@ -242,6 +242,7 @@ custom:
   apiGatewayServiceProxies:
     # Servicio con el que conectaremos a nuestro ApiGateway(SQS en este caso)
     - sqs:
+        # Luego del deploy tendremos una nueva api llamada likeuser que atendera las respuesta de la cola(No es una lambda)
         path: /likeuser
         method: post
         # La cola a la cual nos conectaremos se llama likequeue
