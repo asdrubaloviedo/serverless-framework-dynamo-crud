@@ -214,6 +214,7 @@ resources:
 plugins:
   - serverless-apigateway-service-proxy
   - serverless-lift
+  # - serverless-domain-manager
 
 # Configuraciones personalizadas del plugin "serverless-lift"
 constructs:
@@ -259,3 +260,13 @@ custom:
             # `serverError` is used when the integration response is 500
             serverError: |-
               { "message": "there was an error handling your request" }
+  # Usamos un plugin para manejar dominios con ApiGateway de forma sencilla
+  # De momento falta hacer toda la configuracion del dominio 'slscourse.platzi.com' AWS Certificate Manager para que esto funcione
+  # custom:
+  #   customDomain:
+  #     domainName: slscourse.platzi.com
+  #     stage: dev
+  #     basePath: api
+  #     endpointType: REGIONAL
+  #     securityPolicy: tls_1_2
+  #     apiType: rest
